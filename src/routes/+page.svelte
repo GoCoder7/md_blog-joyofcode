@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as config from '$lib/config';
-	import { formatDate } from '$lib/utils';
+	import { formatDate } from '../lib/utils.js';
 	const { data } = $props();
 </script>
 

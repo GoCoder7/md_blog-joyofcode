@@ -1,12 +1,12 @@
 import type { Frontmatter, MarkdownFile, Post } from '$lib/types';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import pathM from 'path';
+import path from 'path';
 
 async function getPosts() {
 	let posts: Post[] = [];
 	const fileEntries = import.meta.glob<MarkdownFile>('/src/posts/*.md', { eager: true });
-	for (const [path, file] of Object.entries(fileEntries)) {
-		const slug = pathM.basename(path).replace('.md', '');
+	for (const [filePath, file] of Object.entries(fileEntries)) {
+		const slug = path.basename(filePath).replace('.md', '');
 		const frontmatter: Frontmatter = file.metadata;
 		const post: Post = { slug, ...frontmatter };
 		if (post.published) {
