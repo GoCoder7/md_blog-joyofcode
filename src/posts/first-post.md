@@ -13,7 +13,19 @@ published: true
 Hey friends 👋
 
 ```ts
+// ts
 function greet(name: string) {
 	console.log(`Hey ${name}! 👋`);
 }
+```
+
+```lisp
+; lisp
+(defun test nil
+  (setq num 5
+        str "abc"
+  )
+  (vlax-dump-object obj)
+)
+
 ```

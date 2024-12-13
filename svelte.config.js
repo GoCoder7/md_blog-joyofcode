@@ -1,10 +1,49 @@
-import { mdsvex } from 'mdsvex';
+import { escapeSvelte, mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+import { createHighlighter } from 'shiki';
+
+// https://shiki.style/themes
+const theme = 'dracula';
+const highlighter = await createHighlighter({
+	themes: [theme],
+	// https://shiki.style/languages
+	langs: [
+		'js',
+		'ts',
+		'lisp',
+		'py',
+		'c++',
+		'c#',
+		'sql',
+		'svelte',
+		'md',
+		'http',
+		'html',
+		'css',
+		'http',
+		'rs',
+		'kt',
+		'swift',
+		'dart',
+		'json',
+		'yaml',
+		'toml',
+		'shell',
+		'applescript',
+		'ps'
+	]
+});
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexConfig = {
-	extensions: ['md']
+	extensions: ['md'],
+	highlight: {
+		highlighter: async (code, lang = 'text') => {
+			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme }));
+			return `{@html \`${html}\`}`;
+		}
+	}
 };
 
 /** @type {import('@sveltejs/kit').Config} */
