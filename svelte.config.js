@@ -3,6 +3,9 @@ import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 import { createHighlighter } from 'shiki';
+import remarkToc from 'remark-toc';
+import rehypeSlug from 'rehype-slug';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 
 // https://shiki.style/themes
 const theme = 'dracula';
@@ -35,6 +38,7 @@ const highlighter = await createHighlighter({
 		'ps'
 	]
 });
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexConfig = {
 	extensions: ['md'],
@@ -43,7 +47,17 @@ const mdsvexConfig = {
 			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme }));
 			return `{@html \`${html}\`}`;
 		}
-	}
+	},
+	remarkPlugins: [
+		[
+			remarkToc,
+			{
+				maxDepth: 4,
+				heading: '(table[ -]of[ -])?contents?|toc|목차'
+			}
+		]
+	],
+	rehypePlugins: [rehypeSlug, rehypeUnwrapImages]
 };
 
 /** @type {import('@sveltejs/kit').Config} */
