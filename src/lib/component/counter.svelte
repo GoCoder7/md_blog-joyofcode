@@ -6,4 +6,4 @@
 	};
 </script>
 
-<button onclick={increment}>{count}</button>
+<button onclick={increment} in:fade>{count}</button>

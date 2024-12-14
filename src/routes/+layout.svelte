@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';
 
@@ -6,14 +7,17 @@
 	import 'open-props/normalize';
 	import 'open-props/buttons';
 	import '../app.css';
+	import Transition from './transition.svelte';
 
-	const { children } = $props();
+	const { children, data } = $props();
+	const url = $derived(data.url);
 </script>
 
 <div class="layout">
 	<Header />
 	<main>
-		{@render children()}
+		<!-- {@render children()} -->
+		<Transition {children} {url} />
 	</main>
 
 	<Footer />

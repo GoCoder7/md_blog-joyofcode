@@ -5,7 +5,7 @@
 
 <nav>
 	<a href="/" class="title">
-		<b>{config.tilte}</b>
+		<b>{config.title}</b>
 	</a>
 
 	<ul class="links">

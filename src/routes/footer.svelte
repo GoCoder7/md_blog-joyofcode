@@ -3,7 +3,7 @@
 </script>
 
 <footer>
-	<p>{config.tilte} &copy {new Date().getFullYear()}</p>
+	<p>{config.title} &copy {new Date().getFullYear()}</p>
 </footer>
 
 <style>
