@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>{config.title}</title>title
+	<title>{config.title}</title>
 </svelte:head>
 <section>
 	<ul class="posts">
